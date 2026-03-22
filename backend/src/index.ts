@@ -15,7 +15,7 @@ const pool = new Pool({
 const app = express();
 app.use(cors());
 
-app.get('/api', async (req, res) => {
+app.get('/', async (req, res) => {
   const result = await pool.query('SELECT NOW()');
   res.json({
     message: 'API funcionando 🚀',
