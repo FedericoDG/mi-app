@@ -1,10 +1,6 @@
 services:
   frontend:
     build: ./frontend
-    ports:
-      - '80:80'
-    depends_on:
-      - backend
 
   backend:
     build: ./backend
@@ -20,6 +16,16 @@ services:
       POSTGRES_DB: app_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+      - backend
 
 volumes:
   postgres_data:
