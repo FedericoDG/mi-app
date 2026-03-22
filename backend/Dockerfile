@@ -8,8 +8,7 @@ RUN npm install
 
 COPY . .
 
-# compilar TS
-RUN npm run build
+RUN npm install --include=dev
 
 EXPOSE 4000
 
