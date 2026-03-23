@@ -1,0 +1,23 @@
+name: Deploy VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ejecutar deploy en VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 157.254.174.231
+          username: adminuser
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/mi-app
+            git pull
+            docker compose down
+            docker compose up -d --build
