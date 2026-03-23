@@ -1,11 +1,13 @@
 services:
   frontend:
     build: ./frontend
+    restart: unless-stopped
 
   backend:
     build: ./backend
     ports:
       - '4000:4000'
+    restart: unless-stopped
 
   postgres:
     image: postgres:15
@@ -26,6 +28,7 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
 
 volumes:
   postgres_data:
